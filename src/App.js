@@ -18,17 +18,14 @@ class App extends Component {
 		this.updateValue = this.updateValue.bind(this);
 		this.calculateSum = this.calculateSum.bind(this);
 		this.clearScreen = this.clearScreen.bind(this);
-
 	}
 
 	calculateSum() {
 		const formula = this.state.firstValue + this.state.activeSymbol + this.state.secondValue;
-		console.log(formula);
 		function calculateValues(fn) {
 			return new Function('return ' + fn)();
 		}
 		const formulatedValue = calculateValues(formula);
-		console.log(formulatedValue);
 		this.setState({
 			firstValue: formulatedValue,
 			screenDisplay: formulatedValue,
@@ -37,8 +34,6 @@ class App extends Component {
 	}
 
 	updateValue(event) {
-		//  adds/removes the btn highlights
-		//  sets the
 		const btnPressed = event.target.getAttribute('data-calc-symbol');
 
 		if (event.target.classList.contains('calc__symbol')) {
@@ -57,19 +52,15 @@ class App extends Component {
 			this.state.activeSymbol !== "" &&
 			event.target.classList.contains('calc__symbol')) {
 				if (this.state.secondValue === 0) {
-					console.log('inside if calculate fn');
 					this.setState({
 						activeSymbol: btnPressed
 					})
 				} else {
-					console.log('inside else calculate fn');
 					const formula = this.state.firstValue + this.state.activeSymbol + this.state.secondValue;
-					console.log(formula);
 					function calculateValues(fn) {
 						return new Function('return ' + fn)();
 					}
 					const formulatedValue = calculateValues(formula);
-					console.log(formulatedValue);
 					this.setState({
 						firstValue: formulatedValue,
 						screenDisplay: formulatedValue,
@@ -77,7 +68,6 @@ class App extends Component {
 					})
 				}
 		}
-
 		if (!event.target.classList.contains('calc__symbol')) {
 			if (this.state.wasFormulaStarted === false) {
 				if (this.state.hasTyped === false) {
@@ -94,7 +84,6 @@ class App extends Component {
 				}
 			} else {
 				ClearFormulaBtnHighlights();
-
 				if (this.state.hasTyped === false) {
 					this.setState({
 						screenDisplay: event.target.getAttribute('data-btn-number'),
@@ -126,8 +115,7 @@ class App extends Component {
 	render() {
 		return (
 			<div className="calc">
-				<ScreenDisplay display={this.state.screenDisplay}
-							   displayNumber={this.state.screenDisplay}/>
+				<ScreenDisplay display={this.state.screenDisplay} displayNumber={this.state.screenDisplay}/>
 				<ClearScreen action={this.clearScreen} />
 				<button onClick={this.updateValue} data-calc-symbol="/" className="input calc__symbol">÷</button>
 				<button onClick={this.updateValue} data-btn-number="7" className="input">7</button>
